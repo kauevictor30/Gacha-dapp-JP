@@ -1,0 +1,35 @@
+{
+  "name": "Gacha DApp Development",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/rust:1": {
+      "version": "latest",
+      "targets": "wasm32v1-none"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "postCreateCommand": "curl -L https://github.com/stellar/stellar-cli/releases/download/v25.2.0/stellar-cli-v25.2.0-x86_64-unknown-linux-gnu.tar.gz | tar xz -C /usr/local/bin && npm install -g @caatinga/cli",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "serayuzgur.crates",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "rust-analyzer.target": "wasm32v1-none",
+        "rust-analyzer.check.command": "clippy"
+      }
+    }
+  },
+  "forwardPorts": [3000],
+  "remoteEnv": {
+    "STELLAR_NETWORK": "testnet",
+    "STELLAR_RPC_URL": "https://soroban-testnet.stellar.org",
+    "STELLAR_HORIZON_URL": "https://horizon-testnet.stellar.org",
+    "STELLAR_NETWORK_PASSPHRASE": "Test SDF Network ; September 2015"
+  }
+}
